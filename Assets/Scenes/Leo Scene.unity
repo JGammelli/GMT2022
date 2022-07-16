@@ -512,11 +512,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _MoveSpeed: 3
+  _MoveDistance: 1.1
   _MaxDistanceToMoveObject: 0.01
   horizontalInput: 0
   verticalInput: 0
   playerMoveObject: {fileID: 1130634925}
   MoveTileList: []
+  currentTile: {fileID: 0}
   currentTileNr: 0
   currentTileW: 0
   currentTileH: 0
