@@ -13,8 +13,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float horizontalInput;
     [SerializeField] private float verticalInput;
-    [SerializeField] private bool _Moving;
-    [SerializeField] private bool _Put;
+    public bool _Moving;
+    public bool _Put;
 
 
     public Transform playerMoveObject;
@@ -55,40 +55,6 @@ public class PlayerMovement : MonoBehaviour
                 playerMoveObject.position += new Vector3(0, verticalInput * _MoveDistance, 0);
             }
         }
-
-        /*
-        if (Vector2.Distance((Vector2)transform.position, (Vector2)playerMoveObject.position) <= _MaxDistanceToMoveObject)
-        {
-            if (Mathf.Abs(horizontalInput) == 1f)
-            {
-                for (int i = 0; i < MoveTileList.Count; i++)
-                {
-                    if (MoveTileList[i].tileH == currentTileH + horizontalInput)
-                    {
-                        playerMoveObject.position = MoveTileList[i].transform.position;
-                        UpdateCurrentTile(MoveTileList[i]);
-
-                    }
-                }
-            } else if (Mathf.Abs(verticalInput) == 1f)
-            {
-                for (int i = 0; i < MoveTileList.Count; i++)
-                {
-                    if (MoveTileList[i].tileW == currentTileW + verticalInput)
-                    {
-                        playerMoveObject.position = MoveTileList[i].transform.position;
-                        UpdateCurrentTile(MoveTileList[i]);
-                    }
-                }
-            }
-        }
-        */
-
-
-
-
-
-
     }
 
     private void FixedUpdate()
@@ -97,12 +63,21 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void UpdateCurrentTile(Tile tile)
+    private void UpdateCurrentTile()
     {
+        /*
+        if (_Put)
+        {
+            Physics2D.OverlapBoxAll(new Vector2(), )
+        }
+
+
+
         currentTile = tile;
         currentTileNr = currentTile.tileNr;
         currentTileW = currentTile.tileW;
         currentTileH = currentTile.tileH;
+        */
     }
     private void Move()
     {
@@ -111,11 +86,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void ChangeMoveState()
     {
-        if (Vector2.Distance((Vector2)transform.position, (Vector2)playerMoveObject.position) <= _MaxDistanceToMoveObject)
+        if (Vector2.Distance((Vector2)transform.position, (Vector2)playerMoveObject.position) <= _MaxDistanceToMoveObject + 0.1f)
         {
             _Put = true;
             _Moving = false;
-            Debug.Log("Stopped");
         }
         else
         {

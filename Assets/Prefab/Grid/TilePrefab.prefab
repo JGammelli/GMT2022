@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 160701398551372511}
   - component: {fileID: 2470460304453238103}
+  - component: {fileID: 6487393333335617043}
   m_Layer: 0
   m_Name: TilePrefab
   m_TagString: Untagged
@@ -44,6 +45,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a58dd302519e6af4b932a776d6f60f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPowerTile: 0
+  powerUsed: 0
+  powerValue: 0
+  tileNr: 0
+  tileW: 0
+  tileH: 0
+  sr: {fileID: 6444859955307431943}
+  powerColor: {r: 0.3921569, g: 0.86202157, b: 0.98039216, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 0}
+--- !u!61 &6487393333335617043
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699351120375609512}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &8525978932516463887
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,7 +152,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

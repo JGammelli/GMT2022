@@ -24,4 +24,9 @@ public class Player : MonoBehaviour
         playerMovement.currentTileH = playerMovement.currentTile.tileH;
     }
 
+
+    public void PowerUp()
+    {
+        Debug.Log("PowerUp");
+    }
 }
