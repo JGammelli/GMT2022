@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public void InitializePlayer(Vector2 pos, List<Tile> tileList, Tile currentTile)
     {
         transform.position = pos;
+        playerMovement.playerMoveObject.position = pos;
         playerMovement.MoveTileList = tileList;
         playerMovement.currentTile = currentTile;
         playerMovement.currentTileNr = playerMovement.currentTile.tileNr;
