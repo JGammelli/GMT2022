@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class RotationAnimation : MonoBehaviour
 {
+    public float tTime = 0;
+    public int sign = 1;
     public Quaternion cubeRot = new Quaternion(1, 0, 0, 0);
     public Quaternion cubeRotOrig = new Quaternion(1,0,0,0);
     public Quaternion cubeRotGoal = new Quaternion(0,0,0,1);
-    public float tTime = 0;
-    public int sign = 1;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,7 @@ public class RotationAnimation : MonoBehaviour
         {
             sign = 1;
         }
-        tTime =tTime + sign*Time.deltaTime;
+        tTime += sign*Time.deltaTime;
         cubeRot = Quaternion.Slerp(cubeRotOrig, cubeRotGoal, tTime);
         transform.rotation = cubeRot;
     }
