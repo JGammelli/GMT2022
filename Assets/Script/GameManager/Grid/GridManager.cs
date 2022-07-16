@@ -31,6 +31,10 @@ public class GridManager : MonoBehaviour
                 var tile = GameObject.Instantiate(_TilePrefab, Vector2.zero, Quaternion.identity);
                 tile.GetComponent<Tile>().InitializeTile(GetTilePosition(w, h), tileValue);
                 _GameManager.TileList.Add(tile.GetComponent<Tile>());
+
+                tile.GetComponent<Tile>().tileW = w + 1;
+                tile.GetComponent<Tile>().tileH = h + 1;
+
                 tileValue++;
             }
         }

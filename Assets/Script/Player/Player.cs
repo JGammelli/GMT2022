@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private PlayerMovement playerMovement;
 
-    private Rigidbody2D rb;
 
-    public void InitializePlayer(Vector2 pos)
+
+    private void Awake()
+    {
+        playerMovement = GetComponent<PlayerMovement>();
+
+    }
+    public void InitializePlayer(Vector2 pos, List<Tile> tileList, Tile currentTile)
     {
         transform.position = pos;
+        playerMovement.MoveTileList = tileList;
+        playerMovement.currentTile = currentTile;
+        playerMovement.currentTileNr = playerMovement.currentTile.tileNr;
+        playerMovement.currentTileW = playerMovement.currentTile.tileW;
+        playerMovement.currentTileH = playerMovement.currentTile.tileH;
     }
 
 }

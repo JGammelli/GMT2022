@@ -27,6 +27,6 @@ public class GameManager : MonoBehaviour
 
     public void SetPlayerOnGrid()
     {
-        _Player.InitializePlayer(GetStartTile().transform.position);
+        _Player.InitializePlayer(GetStartTile().transform.position, TileList, GetStartTile());
     }
 }
