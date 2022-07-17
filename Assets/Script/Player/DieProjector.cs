@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DieProjector : MonoBehaviour
 {
+    [SerializeField] public Transform rayBox;
     public Transform targetObject;
     public Camera cam;
     public Quaternion rotation;
@@ -16,11 +17,13 @@ public class DieProjector : MonoBehaviour
     public Matrix4x4 mStart;
     private Transform tGoal;
     private Vector3 rotateDir;
-    private bool DoRotate = false;
+    private bool DoRotate = true;
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        
 
         cam.transform.LookAt(targetObject);
         startRot = targetObject.rotation;
@@ -33,68 +36,70 @@ public class DieProjector : MonoBehaviour
     void Update()
     {
         mStart = targetObject.transform.worldToLocalMatrix;
-        if (!inAnim && DoRotate) {
+        if (!inAnim) {
             startRot = targetObject.rotation;
-            inAnim = true;
-            //if (Input.GetKeyDown(KeyCode.D))
-            //{
-            //    Vector3 rotateAmount = new Vector3(0f,0f,-90f);
-            //    tGoal.Rotate(rotateAmount, Space.World);
-            //    endRot = tGoal.rotation;
-            //    //endRot = Quaternion.Euler(startRot.eulerAngles.x, startRot.eulerAngles.y, startRot.eulerAngles.z - 90);
-            //    //endRot = startRot * new Quaternion(0, 0, 0.7071068f, 0.7071068f);
-            //    startTime = Time.time;
-            //    inAnim = true;
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                Vector3 rotateAmount = new Vector3(0f, 0f, -90f);
+                tGoal.Rotate(rotateAmount, Space.World);
+                endRot = tGoal.rotation;
+                //endRot = Quaternion.Euler(startRot.eulerAngles.x, startRot.eulerAngles.y, startRot.eulerAngles.z - 90);
+                //endRot = startRot * new Quaternion(0, 0, 0.7071068f, 0.7071068f);
+                startTime = Time.time;
+                inAnim = true;
 
-            //}
-            //else if (Input.GetKeyDown(KeyCode.A))
-            //{
-            //    Vector3 rotateAmount = new Vector3(0f, 0f, +90f);
-            //    tGoal.Rotate(rotateAmount, Space.World);
-            //    endRot = tGoal.rotation;
-            //    //endRot = Quaternion.Euler(startRot.eulerAngles.x, startRot.eulerAngles.y, startRot.eulerAngles.z + 90);
-            //    //endRot = startRot * new Quaternion(0, 0, -0.7071068f, 0.7071068f);
-            //    startTime = Time.time;
-            //    inAnim = true;
-            //}
-            //else if (Input.GetKeyDown(KeyCode.W))
-            //{
-            //    Vector3 rotateAmount = new Vector3(90f, 0f, 0f);
-            //    tGoal.Rotate(rotateAmount, Space.World);
-            //    endRot = tGoal.rotation;
-            //    //endRot = Quaternion.Euler(startRot.eulerAngles.x + 90, startRot.eulerAngles.y, startRot.eulerAngles.z);
-            //    //endRot = startRot * new Quaternion(0.7071068f, 0, 0, 0.7071068f);
-            //    startTime = Time.time;
-            //    inAnim = true;
-            //}
-            //else if (Input.GetKeyDown(KeyCode.S))
-            //{
-            //    Vector3 rotateAmount = new Vector3(-90f, 0f, 0f);
-            //    tGoal.Rotate(rotateAmount, Space.World);
-            //    endRot = tGoal.rotation;
-            //    //endRot = Quaternion.Euler(startRot.eulerAngles.x - 90, startRot.eulerAngles.y, startRot.eulerAngles.z);
-            //    //endRot = endRot * startRot * new Quaternion(-0.7071068f, 0, 0, 0.7071068f);
-            //    startTime = Time.time;
-            //    inAnim = true;
-            //}
-
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                Vector3 rotateAmount = new Vector3(0f, 0f, +90f);
+                tGoal.Rotate(rotateAmount, Space.World);
+                endRot = tGoal.rotation;
+                //endRot = Quaternion.Euler(startRot.eulerAngles.x, startRot.eulerAngles.y, startRot.eulerAngles.z + 90);
+                //endRot = startRot * new Quaternion(0, 0, -0.7071068f, 0.7071068f);
+                startTime = Time.time;
+                inAnim = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.W))
+            {
+                Vector3 rotateAmount = new Vector3(90f, 0f, 0f);
+                tGoal.Rotate(rotateAmount, Space.World);
+                endRot = tGoal.rotation;
+                //endRot = Quaternion.Euler(startRot.eulerAngles.x + 90, startRot.eulerAngles.y, startRot.eulerAngles.z);
+                //endRot = startRot * new Quaternion(0.7071068f, 0, 0, 0.7071068f);
+                startTime = Time.time;
+                inAnim = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                Vector3 rotateAmount = new Vector3(-90f, 0f, 0f);
+                tGoal.Rotate(rotateAmount, Space.World);
+                endRot = tGoal.rotation;
+                //endRot = Quaternion.Euler(startRot.eulerAngles.x - 90, startRot.eulerAngles.y, startRot.eulerAngles.z);
+                //endRot = endRot * startRot * new Quaternion(-0.7071068f, 0, 0, 0.7071068f);
+                startTime = Time.time;
+                inAnim = true;
+            }
         }
-        if (DoRotate && inAnim) {
+        if (inAnim) {
             targetObject.rotation = Quaternion.Slerp(startRot, endRot, (Time.time - startTime) * 2f);
             
             if (targetObject.rotation == endRot)
             {
                 inAnim = false;
-                DoRotate = false;
+                //DoRotate = false;
             }
         }
-
+        if (Input.GetKeyDown("space"))
+        {
+            getUp(); // remove this thing
+        }
+        
         rotation = targetObject.rotation;
     }
 
     bool RotateDie(int direction, float speed)
     {
-        if (direction == 1 && !inAnim)
+        if (direction == 1 && !inAnim) // Right
         {
             rotateDir = new Vector3(0f, 0f, -90f);
             tGoal.Rotate(rotateDir, Space.World);
@@ -102,7 +107,7 @@ public class DieProjector : MonoBehaviour
             DoRotate = true;
             return true;
         }
-        if (direction == 2 && !inAnim)
+        if (direction == 2 && !inAnim) // Left
         {
             rotateDir = new Vector3(0f, 0f, 90f);
             tGoal.Rotate(rotateDir, Space.World);
@@ -110,7 +115,7 @@ public class DieProjector : MonoBehaviour
             DoRotate = true;
             return true;
         }
-        if (direction == 3 && !inAnim)
+        if (direction == 3 && !inAnim) // Up
         {
             rotateDir = new Vector3(90f, 0f, 0f);
             tGoal.Rotate(rotateDir, Space.World);
@@ -118,7 +123,7 @@ public class DieProjector : MonoBehaviour
             DoRotate = true;
             return true;
         }
-        if (direction == 4 && !inAnim)
+        if (direction == 4 && !inAnim) // Down
         {
             rotateDir = new Vector3(-90f, 0f, 0f);
             tGoal.Rotate(rotateDir, Space.World);
@@ -127,5 +132,47 @@ public class DieProjector : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    int getUp()
+    {
+        var raypos = rayBox.position;
+        var raydir = rayBox.up;
+        RaycastHit hit;
+        if (Physics.Raycast(raypos, raydir, out hit))
+        {
+            var box = hit.transform;
+            if (box.CompareTag("6"))
+            {
+                print("6 IS UP");
+                return 6;
+            }
+            if (box.CompareTag("5"))
+            {
+                print("5 IS UP");
+                return 5;
+            }
+            if (box.CompareTag("4"))
+            {
+                print("4 IS UP");
+                return 4;
+            }
+            if (box.CompareTag("3"))
+            {
+                print("3 IS UP");
+                return 3;
+            }
+            if (box.CompareTag("2"))
+            {
+                print("2 IS UP");
+                return 2;
+            }
+            if (box.CompareTag("1"))
+            {
+                print("1 IS UP");
+                return 1;
+            }
+        }
+        return 0;
     }
 }
